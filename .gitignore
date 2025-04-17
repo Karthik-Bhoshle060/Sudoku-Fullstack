@@ -1,0 +1,10 @@
+# Angular
+Frontend/node_modules/
+Frontend/dist/
+
+# Node.js
+Backend/node_modules/
+
+# Common
+*.log
+.env
