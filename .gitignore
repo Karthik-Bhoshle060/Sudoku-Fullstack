@@ -6,5 +6,4 @@ Frontend/dist/
 Backend/node_modules/
 
 # Common
-*.log
 .env
