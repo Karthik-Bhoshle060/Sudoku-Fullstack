@@ -1,0 +1,12 @@
+<div class="user-profile">
+  <img src="../../../assets/images/user.png" alt="User Avatar" />
+  <p>{{ username }}</p>
+  <p>
+    <strong>🕒 Your Best Time:</strong>
+    {{ formattedTime(userBestScore) || "NA" }}
+  </p>
+  <div class="button-container">
+    <button (click)="logout()">Logout</button>
+    <button (click)="back()">New Game</button>
+  </div>
+</div>

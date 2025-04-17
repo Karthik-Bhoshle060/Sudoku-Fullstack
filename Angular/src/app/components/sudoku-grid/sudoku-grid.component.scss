@@ -1,0 +1,230 @@
+.sudoku-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 40px);
+  grid-template-rows: repeat(9, 40px);
+  gap: 2px;
+  justify-content: center;
+  .row {
+    display: contents;
+    input {
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      font-size: 18px;
+      border: 1px solid grey; /* Default border color */
+      &:focus {
+        outline: none;
+        background-color: #e1fbf6;
+      }
+      &.selcted-value {
+        background-color: #c6e2eb;
+      }
+      &.wrong-selection {
+        background-color: red;
+      }
+      &.disabled-value {
+        // cursor: not-allowed;
+        pointer-events: none;
+      }
+    }
+  }
+}
+.sudoku-value-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 50px);
+  grid-template-rows: repeat(1, 50px);
+  gap: 5px;
+  justify-content: center;
+  margin-top: 15px;
+  text-align: center;
+  .value-row {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid grey;
+    border-radius: 4px;
+    padding: 5px 0px;
+    background-color: #e1fbf6;
+    &.hide-number {
+      visibility: hidden;
+    }
+    &.disable-selection {
+      cursor: none;
+      pointer-events: none;
+      background-color: white;
+    }
+    span {
+      font-size: 14px;
+      &.number {
+        font-size: 18px;
+        font-weight: 600;
+      }
+    }
+  }
+}
+.message-section {
+  display: flex;
+  justify-content: center;
+  width: 380px;
+  margin: auto;
+  padding: 5px;
+  span {
+    width: 33%;
+    justify-content: center;
+    display: flex;
+  }
+}
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Popup content box */
+  .popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    .heading {
+      font-size: 25px;
+    }
+    /* Close button */
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      background: #e74c3c;
+      color: white;
+      border: none;
+      text-decoration: none;
+      border-radius: 5px;
+      &:hover {
+        background: #c0392b;
+      }
+    }
+    .actions {
+      display: flex;
+      div {
+        width: 50%;
+      }
+    }
+  }
+}
+
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* semi-transparent backdrop */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  .popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  }
+  div {
+    background: #fff;
+    padding: 15px 20px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+  }
+  h2 {
+    color: #4caf50;
+    margin: 10px;
+  }
+
+  .stats p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #444;
+  }
+
+  .actions {
+    margin-top: 20px;
+    button {
+      margin: 0 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      background-color: #4caf50;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      &:hover {
+        background-color: #388e3c;
+      }
+    }
+  }
+}
+
+/* Adding border for rows and columns */
+.sudoku-grid div:nth-child(3n + 1) {
+  input {
+    border-top: 3px solid #000;
+  }
+}
+// .verify-button {
+//   display: flex;
+//   align-items: center;
+//   margin: 10px auto;
+//   padding: 8px 16px;
+//   background: green;
+//   color: white;
+//   border: none;
+//   text-decoration: none;
+//   border-radius: 5px;
+// }
+.sudoku-grid div:last-child {
+  input {
+    border-bottom: 3px solid #000 !important;
+  }
+}
+input:nth-child(3n + 1) {
+  border-left: 3px solid black !important;
+}
+input:last-child {
+  border-right: 3px solid black !important;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+  .sudoku-grid {
+    grid-template-columns: repeat(9, 30px);
+    grid-template-rows: repeat(9, 30px);
+    .row input {
+      width: 30px;
+      height: 30px;
+      font-size: 16px;
+    }
+  }
+  .sudoku-value-grid {
+    grid-template-columns: repeat(9, 30px);
+    grid-template-rows: repeat(1, 44px);
+  }
+  .message-section {
+    width: 320px;
+  }
+  .popup .popup-content {
+    width: 80%;
+  }
+  .popup-container .popup-content {
+    width: 80%;
+  }
+}

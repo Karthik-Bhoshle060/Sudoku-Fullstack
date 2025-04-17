@@ -1,0 +1,83 @@
+<div class="message-section">
+  <span>Mistakes: {{ mistakeCount }}/3 </span>
+  <span>Score: {{ scoreCount }} </span>
+  <span>Time: {{ formattedTime(seconds) }} </span>
+</div>
+<div class="sudoku-grid">
+  <div *ngFor="let row of grid; let i = index" class="row">
+    <input
+      *ngFor="let col of row; let j = index"
+      type="text"
+      [(ngModel)]="answergrid[i][j]"
+      [ngClass]="{
+        'selcted-value': selectedValue && selectedValue == answergrid[i][j],
+        'wrong-selection':
+          wrongSelection && i == selectedRow && j == selectedCol
+      }"
+      maxlength="1"
+      pattern="[1-9]"
+      (click)="SelectedValue(i, j)"
+      (input)="validateInput($event, i, j)"
+      [readonly]="true"
+    />
+    <!-- [readonly]="checkType(answergrid[i][j])"
+    /> -->
+  </div>
+</div>
+<div class="counter-container">
+  <div class="sudoku-value-grid">
+    <div
+      *ngFor="let row of valueCount; let i = index"
+      class="value-row"
+      [ngClass]="{
+        'hide-number': 9 - row.count == 0,
+        'disable-selection': !enableValueCount
+      }"
+      (click)="addValue(i + 1)"
+    >
+      <span class="number">
+        {{ i + 1 }}
+      </span>
+      <span>
+        {{ 9 - row.count }}
+      </span>
+    </div>
+  </div>
+</div>
+<div id="myPopup" class="popup" *ngIf="mistakeCount == 3">
+  <div class="popup-content">
+    <span class="heading">Game Over</span>
+    <p>You lost the game because you made 3 mistakes</p>
+    <button class="btn" (click)="secondChance()">Second Chance</button>
+    <div class="actions">
+      <div>
+        <button class="btn" (click)="newGame()">New Game</button>
+      </div>
+      <div>
+        <button class="btn" (click)="restart()">Restart</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="popup-container" *ngIf="gameCompleted">
+  <div class="popup-content">
+    <h2>🎉 Puzzle Completed!</h2>
+
+    <div class="stats">
+      <p><strong>🕒 Your Time:</strong> {{ formattedTime(seconds) }}</p>
+      <p><strong>⭐ Your Score:</strong> {{ scoreCount }} Points</p>
+      <p>
+        <strong>🏆 Best Time:</strong>
+        {{ formattedTime(topperRecord.timeTakenInSeconds) }} by
+        {{ topperRecord.username }}
+      </p>
+    </div>
+
+    <div class="actions">
+      <button (click)="newGame()">New Game</button>
+      <button (click)="gotoProfile()">Profile</button>
+    </div>
+  </div>
+</div>
+
+<!-- <button class="verify-button" (click)="Validate()">Verify Suduku</button> -->

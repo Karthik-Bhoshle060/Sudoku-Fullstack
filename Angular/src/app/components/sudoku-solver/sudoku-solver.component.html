@@ -1,0 +1,30 @@
+<div
+  class="rules-container"
+  *ngIf="!startSudokuGame && !appServiceService.isRulesShowedtoUser"
+>
+  <h2>🧩 Sudoku Rules</h2>
+  <ul>
+    <li>
+      Each <strong>row</strong> must contain the numbers
+      <strong>1 to 9</strong>, with no duplicates.
+    </li>
+    <li>
+      Each <strong>column</strong> must contain the numbers
+      <strong>1 to 9</strong>, with no duplicates.
+    </li>
+    <li>
+      Each <strong>3×3 subgrid</strong> must contain the numbers
+      <strong>1 to 9</strong>, with no duplicates.
+    </li>
+    <li>
+      Use <strong>logic</strong> — no guessing is needed for a valid puzzle.
+    </li>
+  </ul>
+  <button class="start-button" (click)="startGame()">▶ Start Game</button>
+</div>
+<app-sudoku-grid
+  *ngIf="startSudokuGame"
+  [grid]="sudokugrid"
+  (VerifyPuzzle)="printOutput($event)"
+></app-sudoku-grid>
+<router-outlet></router-outlet>

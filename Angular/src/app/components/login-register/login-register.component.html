@@ -1,0 +1,75 @@
+<div class="login-container">
+  <h2>{{ pageTitle != "sign-up" ? "Login" : "Register" }}</h2>
+  <form
+    *ngIf="pageTitle != 'sign-up'"
+    [formGroup]="loginForm"
+    id="loginForm"
+    class="login-register-Form"
+    (ngSubmit)="verifyUser()"
+  >
+    <!-- <label for="username">Username:</label> -->
+    <input
+      formControlName="username"
+      placeholder="Username"
+      type="text"
+      id="username"
+      required
+    />
+
+    <!-- <label for="password">Password:</label> -->
+    <input
+      formControlName="password"
+      placeholder="Password"
+      type="password"
+      id="password"
+      required
+    />
+
+    <button type="submit" [disabled]="loginForm.invalid">Login</button>
+  </form>
+  <form
+    *ngIf="pageTitle == 'sign-up'"
+    [formGroup]="registerForm"
+    id="loginForm"
+    class="login-register-Form"
+    (ngSubmit)="registeruser()"
+  >
+    <!-- <label for="username">Username:</label> -->
+    <input
+      formControlName="username"
+      placeholder="Username"
+      type="text"
+      id="username"
+      required
+    />
+
+    <!-- <label for="password">Password:</label> -->
+    <input
+      formControlName="password"
+      placeholder="Password"
+      type="password"
+      id="password"
+      required
+    />
+    <input
+      formControlName="confirmPassword"
+      placeholder="Confirm Password"
+      type="password"
+      id="confirmPassword"
+      required
+    />
+    <button
+      type="submit"
+      [disabled]="registerForm.invalid || val.password != val.confirmPassword"
+    >
+      Register
+    </button>
+  </form>
+  <p class="sign_up" *ngIf="pageTitle != 'sign-up'">
+    Don't have an account? <button (click)="goToSignUp()">Sign up</button>
+  </p>
+  <p class="sign_up" *ngIf="pageTitle == 'sign-up'">
+    Already have an account? <button (click)="goToSignUp()">Login now</button>
+  </p>
+  <p id="message"></p>
+</div>
